@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import ThemeContext from "./AppContext";
+import Toolbar from "./Toolbar";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [theme, setAppTheme] = useState("gray");
+    const handleThemeToggle = () => {
+        theme === "red" ? setAppTheme("gray") : setAppTheme("red");
+    };
+    return (
+        <div className="App">
+            <h1>React Context Demo</h1>
+            <ThemeContext.Provider
+                // tie the context state to component state
+                // and the context state update method to component state update method
+                value={{ theme, toggleTheme: handleThemeToggle }}
+            >
+                <Toolbar />
+            </ThemeContext.Provider>
+        </div>
+    );
 }
 
 export default App;
